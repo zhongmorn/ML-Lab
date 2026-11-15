@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+/output/*/
+!/output/CartPole-v1/
+!/output/Pendulum-v1/
+/output/CartPole-v1/*
+/output/Pendulum-v1/*
+!/output/CartPole-v1/seed42/
+!/output/Pendulum-v1/seed42/
+/output/*/seed42/*
+!/output/*/seed42/config.json
+!/output/*/seed42/summary.json
+!/output/*/seed42/figures/

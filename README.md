@@ -1,66 +1,61 @@
-# Machine Learning Algorithms Collection
+# ML-Lab
 
-机器学习算法实现集合，包含基础机器学习、深度学习和强化学习三大类算法的完整实现，配套详细文档和实验结果。
+用 PyTorch 实现机器学习和强化学习算法，记录如何运行实验以及跑出了什么结果。
 
-## 📚 项目结构
+## 目录
 
+```text
+ML-Lab
+├── README.md
+├── CHANGELOG.md
+├── Machine-Learning
+│   ├── Regression          # 回归
+│   ├── Classification      # 分类
+│   └── NeuralNetwork       # 神经网络
+└── Reinforcement-learning
+    ├── DQN                 # 深度 Q 网络
+    ├── DoubleDQN           # 双重深度 Q 网络
+    ├── OPE                 # 离线策略评估
+    └── PPO                 # PPO-Clip + GAE
 ```
-MachineLearning/
-├── BasicLearning/              # 基础机器学习算法
-│   ├── Classification/          # 分类任务
-│   └── Regression/              # 回归任务
-├── ReinforcementLearning/       # 强化学习算法
-│   ├── DQN/                     # DQN算法实现
-│   ├── DDQN/                    # DDQN算法实现
-│   ├── OPE/                     # 离线策略评估算法实现
-│   └── results/                 # 公共实验结果目录
-├── Documents/                   # 所有文档资源（Markdown格式）
-├── .gitignore                   # Git忽略配置
-├── CHANGELOG.md                 # 版本变更记录
-└── README.md                    # 项目说明文档
-```
 
-## ✨ 已实现算法
+## 运行实验
 
-### Basic Learning 基础机器学习
-| 算法 | 任务 | 数据集 | 说明 |
-|------|------|--------|------|
-| CNN分类器 | 图像分类 | FashionMNIST | 基于卷积神经网络的服装图像分类 |
-| 线性回归/深度回归 | 回归预测 | 合成数据集 | 对比线性模型和深度神经网络的回归效果 |
-
-### Reinforcement Learning 强化学习
-| 算法 | 支持环境 | 说明 |
-|------|----------|------|
-| DQN | CartPole-v1, MountainCar-v0 | 经典深度Q网络实现 |
-| DDQN | CartPole-v1, MountainCar-v0 | 双重DQN算法，解决DQN过估计问题 |
-| OPE | Pendulum-v1, Swimmer-v5 | 离线策略评估算法，包含倒立摆和Swimmer机器人两个完整实验环境和数据集，无需交互即可评估策略性能 |
-
-
-## 🛠️ 环境安装
+从仓库根目录进入你要运行的实验。例如，运行回归实验：
 
 ```bash
-git clone https://github.com/cimorn/MachineLearning.git
-cd MachineLearning
-```
-
-进入对应算法目录安装依赖：
-```bash
-cd <算法目录路径>
-pip install -r requirements.txt
-```
-
-## 🚀 使用方法
-
-进入对应算法目录直接运行主程序：
-```bash
-cd <算法目录路径>
+cd Machine-Learning/Regression
+python -m pip install -r requirements.txt
 python main.py
 ```
 
-## 📝 目录规范
+运行 OPE 时，先进入对应的环境目录。运行 PPO 时，从仓库根目录执行：
 
-- 每个算法独立目录存放，包含专属`requirements.txt`依赖清单
-- `data/`: 数据集目录（已加入.gitignore，无需提交）
-- `results/`: 实验输出结果目录（已加入.gitignore，无需提交）
-- 所有算法文档统一存放在根目录`Documents/`下（Markdown格式）
-- 多实验算法（如OPE）按不同环境分子目录独立存放
+```bash
+cd Reinforcement-learning/PPO
+python -m pip install -r requirements.txt
+python main.py train --config run/config/cartpole.json --device cpu --run-number 1
+```
+
+把配置换成 `run/config/pendulum.json` 可以运行 Pendulum 实验。有可用的 CUDA 环境时，可将设备参数改为 `cuda`。
+
+## 实验入口
+
+### Machine-Learning
+
+| 算法 | 实验 |
+| --- | --- |
+| [回归](Machine-Learning/Regression/README.md) | 合成数据 |
+| [分类](Machine-Learning/Classification/README.md) | Fashion-MNIST |
+| [神经网络](Machine-Learning/NeuralNetwork/README.md) | 正向传播与反向传播 |
+
+### Reinforcement-learning
+
+| 实验 | 任务 |
+| --- | --- |
+| [DQN](Reinforcement-learning/DQN/README.md) | CartPole-v1、MountainCar-v0 |
+| [DoubleDQN](Reinforcement-learning/DoubleDQN/README.md) | CartPole-v1、MountainCar-v0 |
+| [OPE](Reinforcement-learning/OPE/README.md) | Pendulum-v1、Swimmer-v5 |
+| [PPO](Reinforcement-learning/PPO/README.md) | CartPole-v1、Pendulum-v1 |
+
+实验原理与代码放在同一目录。
