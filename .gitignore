@@ -1,0 +1,21 @@
+# Python 缓存与虚拟环境
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# 本机编辑器设置与系统文件
+**/.vscode/settings.json
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 可重新下载的 Fashion-MNIST 数据
+/Deep-Learning/03.Classification/data/FashionMNIST/
+
+# 本地写作规则
+/MARKDOWN_RULES.md

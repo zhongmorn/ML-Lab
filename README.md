@@ -1,61 +1,92 @@
 # ML-Lab
+中文 | [English](README.en.md)
 
-用 PyTorch 实现机器学习和强化学习算法，记录如何运行实验以及跑出了什么结果。
+用 PyTorch 实现机器学习算法，记录实验的运行方法和结果。
+
+<br>
 
 ## 目录
 
 ```text
 ML-Lab
 ├── README.md
-├── CHANGELOG.md
-├── Machine-Learning
-│   ├── Regression          # 回归
-│   ├── Classification      # 分类
-│   └── NeuralNetwork       # 神经网络
+├── README.en.md
+├── Deep-Learning
+│   ├── 01.NeuralNetwork     # 神经网络
+│   ├── 02.Regression        # 回归
+│   ├── 03.Classification    # 分类
+│   └── 04.Transformer       # 因果自注意力
 └── Reinforcement-learning
-    ├── DQN                 # 深度 Q 网络
-    ├── DoubleDQN           # 双重深度 Q 网络
-    ├── OPE                 # 离线策略评估
-    └── PPO                 # PPO-Clip + GAE
+    ├── 01.Q-learning          # 表格型 Q-learning
+    ├── 02.DQN                 # 深度 Q 网络
+    ├── 03.DDQN                # 双重深度 Q 网络
+    └── 04.PPO                 # PPO-Clip + GAE
 ```
 
-## 运行实验
+<br>
 
-从仓库根目录进入你要运行的实验。例如，运行回归实验：
+## 运行实验
+从仓库根目录进入对应的实验目录。以下是运行回归实验的命令。
 
 ```bash
-cd Machine-Learning/Regression
+cd Deep-Learning/02.Regression
 python -m pip install -r requirements.txt
 python main.py
 ```
 
-运行 OPE 时，先进入对应的环境目录。运行 PPO 时，从仓库根目录执行：
+DQN 和 Double DQN 在各自的实验目录中运行 `python main.py`，环境在对应的 `main.py` 中选择。
+
+运行 PPO 时，从仓库根目录执行以下命令。
 
 ```bash
-cd Reinforcement-learning/PPO
+cd Reinforcement-learning/04.PPO
 python -m pip install -r requirements.txt
-python main.py train --config run/config/cartpole.json --device cpu --run-number 1
+python main.py
 ```
 
-把配置换成 `run/config/pendulum.json` 可以运行 Pendulum 实验。有可用的 CUDA 环境时，可将设备参数改为 `cuda`。
+在 PPO 的 `main.py` 中选择实验配置。
+
+<br>
 
 ## 实验入口
+### Deep-Learning
 
-### Machine-Learning
-
-| 算法 | 实验 |
-| --- | --- |
-| [回归](Machine-Learning/Regression/README.md) | 合成数据 |
-| [分类](Machine-Learning/Classification/README.md) | Fashion-MNIST |
-| [神经网络](Machine-Learning/NeuralNetwork/README.md) | 正向传播与反向传播 |
+| 文件 | 名称 | 任务 |
+| --- | --- | --- |
+| [01.NeuralNetwork](Deep-Learning/01.NeuralNetwork/docs/README.md) | 正向传播与反向传播 | 合成数据 |
+| [02.Regression](Deep-Learning/02.Regression/docs/README.md) | 回归模型 | 合成数据 |
+| [03.Classification](Deep-Learning/03.Classification/docs/README.md) | 分类模型 | Fashion-MNIST |
+| [04.Transformer](Deep-Learning/04.Transformer/docs/README.md) | Transformer | 合成语料 |
 
 ### Reinforcement-learning
 
-| 实验 | 任务 |
-| --- | --- |
-| [DQN](Reinforcement-learning/DQN/README.md) | CartPole-v1、MountainCar-v0 |
-| [DoubleDQN](Reinforcement-learning/DoubleDQN/README.md) | CartPole-v1、MountainCar-v0 |
-| [OPE](Reinforcement-learning/OPE/README.md) | Pendulum-v1、Swimmer-v5 |
-| [PPO](Reinforcement-learning/PPO/README.md) | CartPole-v1、Pendulum-v1 |
+| 文件 | 名称 | 任务 |
+| --- | --- | --- |
+| [01.Q-learning](Reinforcement-learning/01.Q-learning/docs/README.md) | 表格型 Q-learning | 在 8×8 打滑迷宫中找食物 |
+| [02.DQN](Reinforcement-learning/02.DQN/docs/README.md) | 深度 Q 网络 | CartPole-v1 |
+| [03.DDQN](Reinforcement-learning/03.DDQN/docs/README.md) | 双重深度 Q 网络 | CartPole-v1 |
+| [04.PPO](Reinforcement-learning/04.PPO/docs/README.md) | 近端策略优化（PPO-Clip） | CartPole-v1、Pendulum-v1 |
 
-实验原理与代码放在同一目录。
+实验原理和结果见各实验目录中的 `docs/README.md`。
+
+<br>
+
+## 未来计划
+
+| 名称 |
+| --- |
+| 传统机器学习 |
+| 时间序列 |
+| 推荐与排序 |
+| 图学习 |
+| 异常检测 |
+| 因果推断 |
+| 多模态学习 |
+| 自监督表征学习 |
+| 图像生成 |
+| 大模型后训练 |
+| 模型压缩与推理优化 |
+| 半监督学习 |
+| 迁移学习 |
+| 联邦学习 |
+| 多智能体强化学习 |

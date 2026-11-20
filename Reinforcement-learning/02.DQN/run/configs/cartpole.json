@@ -1,0 +1,17 @@
+{
+  "env_name": "CartPole-v1",
+  "lr": 0.003,
+  "hidden_dim": 128,
+  "gamma": 0.98,
+  "epsilon_start": 1.0,
+  "epsilon_end": 0.01,
+  "epsilon_decay": 0.995,
+  "target_update": 200,
+  "buffer_size": 10000,
+  "minimal_size": 500,
+  "batch_size": 64,
+  "train_episodes": 500,
+  "seed": 42,
+  "eval_seed": 20000,
+  "eval_episodes": 50
+}

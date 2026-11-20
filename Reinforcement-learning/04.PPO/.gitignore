@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.pyc
+/output/*/
+!/output/CartPole-v1/
+!/output/Pendulum-v1/
+/output/CartPole-v1/*
+/output/Pendulum-v1/*
+!/output/CartPole-v1/seed42/
+!/output/Pendulum-v1/seed42/
+/output/*/seed42/*
+!/output/*/seed42/config.json
+!/output/*/seed42/summary.json
+
+# Results cited by the PPO READMEs
+!/output/CartPole-v1/seed42_run1/
+!/output/Pendulum-v1/seed42_run1/
+/output/*/seed42_run1/*
+!/output/*/seed42_run1/results.json
+!/output/*/seed42_run1/training.png
+!/output/*/seed42_run1/evaluation.png
+!/output/*/seed42_run1/loss.png

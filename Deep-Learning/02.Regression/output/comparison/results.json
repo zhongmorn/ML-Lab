@@ -1,0 +1,44 @@
+[
+  {
+    "dataset": "Linear target",
+    "model": "Linear",
+    "train_mse": 0.0001046176980707969,
+    "validation_mae": 0.008259816095232964,
+    "validation_rmse": 0.01039912085980177
+  },
+  {
+    "dataset": "Linear target",
+    "model": "Deep",
+    "train_mse": 0.00046002809085621266,
+    "validation_mae": 0.018800022080540657,
+    "validation_rmse": 0.02462167851626873
+  },
+  {
+    "dataset": "Nonlinear target",
+    "model": "Linear",
+    "train_mse": 5.15581014752388,
+    "validation_mae": 1.8742483854293823,
+    "validation_rmse": 2.3102529048919678
+  },
+  {
+    "dataset": "Nonlinear target",
+    "model": "Deep",
+    "train_mse": 0.0645814680683543,
+    "validation_mae": 0.2656964957714081,
+    "validation_rmse": 0.2821018695831299
+  },
+  {
+    "dataset": "High-noise nonlinear",
+    "model": "Linear",
+    "train_mse": 6.232022725045681,
+    "validation_mae": 2.0872557163238525,
+    "validation_rmse": 2.5691404342651367
+  },
+  {
+    "dataset": "High-noise nonlinear",
+    "model": "Deep",
+    "train_mse": 1.151075568050146,
+    "validation_mae": 0.8698413968086243,
+    "validation_rmse": 1.094252586364746
+  }
+]
