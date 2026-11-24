@@ -1,0 +1,746 @@
+{
+  "config": {
+    "train_seed": 42,
+    "eval_seed": 2026,
+    "eval_contexts": 4096,
+    "updates": 120,
+    "contexts_per_update": 64,
+    "group_size": 8,
+    "update_epochs": 4,
+    "learning_rate": 0.03,
+    "clip_epsilon": 0.2,
+    "kl_beta": 0.02
+  },
+  "training": [
+    {
+      "update": 1,
+      "mean_reward": 0.244140625,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.012424502521753311
+    },
+    {
+      "update": 2,
+      "mean_reward": 0.287109375,
+      "mixed_group_rate": 0.953125,
+      "kl": 0.03778194636106491
+    },
+    {
+      "update": 3,
+      "mean_reward": 0.294921875,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.07285834848880768
+    },
+    {
+      "update": 4,
+      "mean_reward": 0.3125,
+      "mixed_group_rate": 0.921875,
+      "kl": 0.09221671521663666
+    },
+    {
+      "update": 5,
+      "mean_reward": 0.322265625,
+      "mixed_group_rate": 0.953125,
+      "kl": 0.1231735497713089
+    },
+    {
+      "update": 6,
+      "mean_reward": 0.373046875,
+      "mixed_group_rate": 0.90625,
+      "kl": 0.1258036494255066
+    },
+    {
+      "update": 7,
+      "mean_reward": 0.37109375,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.123292937874794
+    },
+    {
+      "update": 8,
+      "mean_reward": 0.4375,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.14646324515342712
+    },
+    {
+      "update": 9,
+      "mean_reward": 0.4296875,
+      "mixed_group_rate": 1.0,
+      "kl": 0.17722199857234955
+    },
+    {
+      "update": 10,
+      "mean_reward": 0.38671875,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.17917680740356445
+    },
+    {
+      "update": 11,
+      "mean_reward": 0.4921875,
+      "mixed_group_rate": 0.984375,
+      "kl": 0.21711528301239014
+    },
+    {
+      "update": 12,
+      "mean_reward": 0.4765625,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.22485554218292236
+    },
+    {
+      "update": 13,
+      "mean_reward": 0.47265625,
+      "mixed_group_rate": 0.984375,
+      "kl": 0.22997727990150452
+    },
+    {
+      "update": 14,
+      "mean_reward": 0.54296875,
+      "mixed_group_rate": 1.0,
+      "kl": 0.3151499629020691
+    },
+    {
+      "update": 15,
+      "mean_reward": 0.505859375,
+      "mixed_group_rate": 0.984375,
+      "kl": 0.3435554504394531
+    },
+    {
+      "update": 16,
+      "mean_reward": 0.462890625,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.3235040605068207
+    },
+    {
+      "update": 17,
+      "mean_reward": 0.466796875,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.3409237265586853
+    },
+    {
+      "update": 18,
+      "mean_reward": 0.556640625,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.3789134919643402
+    },
+    {
+      "update": 19,
+      "mean_reward": 0.578125,
+      "mixed_group_rate": 1.0,
+      "kl": 0.3912515640258789
+    },
+    {
+      "update": 20,
+      "mean_reward": 0.5546875,
+      "mixed_group_rate": 0.984375,
+      "kl": 0.4136829972267151
+    },
+    {
+      "update": 21,
+      "mean_reward": 0.599609375,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.43838077783584595
+    },
+    {
+      "update": 22,
+      "mean_reward": 0.619140625,
+      "mixed_group_rate": 0.96875,
+      "kl": 0.4972791075706482
+    },
+    {
+      "update": 23,
+      "mean_reward": 0.583984375,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.47914451360702515
+    },
+    {
+      "update": 24,
+      "mean_reward": 0.599609375,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.5419398546218872
+    },
+    {
+      "update": 25,
+      "mean_reward": 0.591796875,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.4862625002861023
+    },
+    {
+      "update": 26,
+      "mean_reward": 0.580078125,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.5218153595924377
+    },
+    {
+      "update": 27,
+      "mean_reward": 0.591796875,
+      "mixed_group_rate": 1.0,
+      "kl": 0.5395506024360657
+    },
+    {
+      "update": 28,
+      "mean_reward": 0.6484375,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.6424542665481567
+    },
+    {
+      "update": 29,
+      "mean_reward": 0.578125,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.5705868005752563
+    },
+    {
+      "update": 30,
+      "mean_reward": 0.6328125,
+      "mixed_group_rate": 0.875,
+      "kl": 0.6087112426757812
+    },
+    {
+      "update": 31,
+      "mean_reward": 0.6484375,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.5934862494468689
+    },
+    {
+      "update": 32,
+      "mean_reward": 0.70703125,
+      "mixed_group_rate": 0.859375,
+      "kl": 0.6340750455856323
+    },
+    {
+      "update": 33,
+      "mean_reward": 0.662109375,
+      "mixed_group_rate": 0.953125,
+      "kl": 0.6355205178260803
+    },
+    {
+      "update": 34,
+      "mean_reward": 0.66796875,
+      "mixed_group_rate": 0.875,
+      "kl": 0.6422730684280396
+    },
+    {
+      "update": 35,
+      "mean_reward": 0.634765625,
+      "mixed_group_rate": 0.875,
+      "kl": 0.6247348189353943
+    },
+    {
+      "update": 36,
+      "mean_reward": 0.701171875,
+      "mixed_group_rate": 0.84375,
+      "kl": 0.6626826524734497
+    },
+    {
+      "update": 37,
+      "mean_reward": 0.689453125,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.7014623284339905
+    },
+    {
+      "update": 38,
+      "mean_reward": 0.658203125,
+      "mixed_group_rate": 0.9375,
+      "kl": 0.6547070145606995
+    },
+    {
+      "update": 39,
+      "mean_reward": 0.65625,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.6667836308479309
+    },
+    {
+      "update": 40,
+      "mean_reward": 0.677734375,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.703975260257721
+    },
+    {
+      "update": 41,
+      "mean_reward": 0.736328125,
+      "mixed_group_rate": 0.8125,
+      "kl": 0.7812516689300537
+    },
+    {
+      "update": 42,
+      "mean_reward": 0.6953125,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.7215784192085266
+    },
+    {
+      "update": 43,
+      "mean_reward": 0.681640625,
+      "mixed_group_rate": 0.890625,
+      "kl": 0.7376307249069214
+    },
+    {
+      "update": 44,
+      "mean_reward": 0.701171875,
+      "mixed_group_rate": 0.859375,
+      "kl": 0.7589797377586365
+    },
+    {
+      "update": 45,
+      "mean_reward": 0.71484375,
+      "mixed_group_rate": 0.796875,
+      "kl": 0.7288634181022644
+    },
+    {
+      "update": 46,
+      "mean_reward": 0.748046875,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.7879434823989868
+    },
+    {
+      "update": 47,
+      "mean_reward": 0.7421875,
+      "mixed_group_rate": 0.796875,
+      "kl": 0.7560213804244995
+    },
+    {
+      "update": 48,
+      "mean_reward": 0.724609375,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.7722343802452087
+    },
+    {
+      "update": 49,
+      "mean_reward": 0.69140625,
+      "mixed_group_rate": 0.796875,
+      "kl": 0.7518088817596436
+    },
+    {
+      "update": 50,
+      "mean_reward": 0.68359375,
+      "mixed_group_rate": 0.8125,
+      "kl": 0.6887583136558533
+    },
+    {
+      "update": 51,
+      "mean_reward": 0.720703125,
+      "mixed_group_rate": 0.828125,
+      "kl": 0.7562355995178223
+    },
+    {
+      "update": 52,
+      "mean_reward": 0.767578125,
+      "mixed_group_rate": 0.8125,
+      "kl": 0.8078734278678894
+    },
+    {
+      "update": 53,
+      "mean_reward": 0.732421875,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8103699684143066
+    },
+    {
+      "update": 54,
+      "mean_reward": 0.7421875,
+      "mixed_group_rate": 0.8125,
+      "kl": 0.7993806004524231
+    },
+    {
+      "update": 55,
+      "mean_reward": 0.705078125,
+      "mixed_group_rate": 0.78125,
+      "kl": 0.7587084770202637
+    },
+    {
+      "update": 56,
+      "mean_reward": 0.740234375,
+      "mixed_group_rate": 0.75,
+      "kl": 0.7753070592880249
+    },
+    {
+      "update": 57,
+      "mean_reward": 0.779296875,
+      "mixed_group_rate": 0.78125,
+      "kl": 0.7818757891654968
+    },
+    {
+      "update": 58,
+      "mean_reward": 0.755859375,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8017399907112122
+    },
+    {
+      "update": 59,
+      "mean_reward": 0.677734375,
+      "mixed_group_rate": 0.84375,
+      "kl": 0.725588321685791
+    },
+    {
+      "update": 60,
+      "mean_reward": 0.75,
+      "mixed_group_rate": 0.734375,
+      "kl": 0.8179075717926025
+    },
+    {
+      "update": 61,
+      "mean_reward": 0.736328125,
+      "mixed_group_rate": 0.78125,
+      "kl": 0.8520552515983582
+    },
+    {
+      "update": 62,
+      "mean_reward": 0.755859375,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8344274759292603
+    },
+    {
+      "update": 63,
+      "mean_reward": 0.72265625,
+      "mixed_group_rate": 0.75,
+      "kl": 0.8098064064979553
+    },
+    {
+      "update": 64,
+      "mean_reward": 0.76953125,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8344146609306335
+    },
+    {
+      "update": 65,
+      "mean_reward": 0.734375,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.8417890071868896
+    },
+    {
+      "update": 66,
+      "mean_reward": 0.822265625,
+      "mixed_group_rate": 0.6875,
+      "kl": 0.8358519673347473
+    },
+    {
+      "update": 67,
+      "mean_reward": 0.751953125,
+      "mixed_group_rate": 0.75,
+      "kl": 0.8306828737258911
+    },
+    {
+      "update": 68,
+      "mean_reward": 0.76171875,
+      "mixed_group_rate": 0.75,
+      "kl": 0.8332038521766663
+    },
+    {
+      "update": 69,
+      "mean_reward": 0.794921875,
+      "mixed_group_rate": 0.71875,
+      "kl": 0.8937980532646179
+    },
+    {
+      "update": 70,
+      "mean_reward": 0.76953125,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.883308470249176
+    },
+    {
+      "update": 71,
+      "mean_reward": 0.818359375,
+      "mixed_group_rate": 0.609375,
+      "kl": 0.9597030878067017
+    },
+    {
+      "update": 72,
+      "mean_reward": 0.78515625,
+      "mixed_group_rate": 0.734375,
+      "kl": 0.9005354046821594
+    },
+    {
+      "update": 73,
+      "mean_reward": 0.77734375,
+      "mixed_group_rate": 0.71875,
+      "kl": 0.854864239692688
+    },
+    {
+      "update": 74,
+      "mean_reward": 0.7421875,
+      "mixed_group_rate": 0.734375,
+      "kl": 0.8828378319740295
+    },
+    {
+      "update": 75,
+      "mean_reward": 0.75390625,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8444810509681702
+    },
+    {
+      "update": 76,
+      "mean_reward": 0.794921875,
+      "mixed_group_rate": 0.71875,
+      "kl": 0.8917365074157715
+    },
+    {
+      "update": 77,
+      "mean_reward": 0.8203125,
+      "mixed_group_rate": 0.65625,
+      "kl": 0.9378665089607239
+    },
+    {
+      "update": 78,
+      "mean_reward": 0.763671875,
+      "mixed_group_rate": 0.71875,
+      "kl": 0.8992815613746643
+    },
+    {
+      "update": 79,
+      "mean_reward": 0.748046875,
+      "mixed_group_rate": 0.8125,
+      "kl": 0.8542318940162659
+    },
+    {
+      "update": 80,
+      "mean_reward": 0.779296875,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.8889251947402954
+    },
+    {
+      "update": 81,
+      "mean_reward": 0.7890625,
+      "mixed_group_rate": 0.734375,
+      "kl": 0.9163554906845093
+    },
+    {
+      "update": 82,
+      "mean_reward": 0.771484375,
+      "mixed_group_rate": 0.6875,
+      "kl": 0.9345074892044067
+    },
+    {
+      "update": 83,
+      "mean_reward": 0.80078125,
+      "mixed_group_rate": 0.625,
+      "kl": 0.9267039895057678
+    },
+    {
+      "update": 84,
+      "mean_reward": 0.828125,
+      "mixed_group_rate": 0.625,
+      "kl": 0.94176185131073
+    },
+    {
+      "update": 85,
+      "mean_reward": 0.77734375,
+      "mixed_group_rate": 0.625,
+      "kl": 0.8713544607162476
+    },
+    {
+      "update": 86,
+      "mean_reward": 0.751953125,
+      "mixed_group_rate": 0.75,
+      "kl": 0.9073312282562256
+    },
+    {
+      "update": 87,
+      "mean_reward": 0.7578125,
+      "mixed_group_rate": 0.703125,
+      "kl": 0.8869146108627319
+    },
+    {
+      "update": 88,
+      "mean_reward": 0.748046875,
+      "mixed_group_rate": 0.71875,
+      "kl": 0.8310814499855042
+    },
+    {
+      "update": 89,
+      "mean_reward": 0.744140625,
+      "mixed_group_rate": 0.734375,
+      "kl": 0.8997726440429688
+    },
+    {
+      "update": 90,
+      "mean_reward": 0.822265625,
+      "mixed_group_rate": 0.609375,
+      "kl": 0.9330500364303589
+    },
+    {
+      "update": 91,
+      "mean_reward": 0.75390625,
+      "mixed_group_rate": 0.6875,
+      "kl": 0.8548542261123657
+    },
+    {
+      "update": 92,
+      "mean_reward": 0.75,
+      "mixed_group_rate": 0.6875,
+      "kl": 0.9448922872543335
+    },
+    {
+      "update": 93,
+      "mean_reward": 0.79296875,
+      "mixed_group_rate": 0.59375,
+      "kl": 0.9783297777175903
+    },
+    {
+      "update": 94,
+      "mean_reward": 0.76171875,
+      "mixed_group_rate": 0.765625,
+      "kl": 0.8694019317626953
+    },
+    {
+      "update": 95,
+      "mean_reward": 0.82421875,
+      "mixed_group_rate": 0.578125,
+      "kl": 0.9856435656547546
+    },
+    {
+      "update": 96,
+      "mean_reward": 0.802734375,
+      "mixed_group_rate": 0.625,
+      "kl": 0.9514455199241638
+    },
+    {
+      "update": 97,
+      "mean_reward": 0.751953125,
+      "mixed_group_rate": 0.671875,
+      "kl": 0.9394491910934448
+    },
+    {
+      "update": 98,
+      "mean_reward": 0.771484375,
+      "mixed_group_rate": 0.640625,
+      "kl": 0.9136537909507751
+    },
+    {
+      "update": 99,
+      "mean_reward": 0.822265625,
+      "mixed_group_rate": 0.65625,
+      "kl": 0.9796836972236633
+    },
+    {
+      "update": 100,
+      "mean_reward": 0.775390625,
+      "mixed_group_rate": 0.640625,
+      "kl": 0.8725817799568176
+    },
+    {
+      "update": 101,
+      "mean_reward": 0.802734375,
+      "mixed_group_rate": 0.625,
+      "kl": 0.9823107719421387
+    },
+    {
+      "update": 102,
+      "mean_reward": 0.8125,
+      "mixed_group_rate": 0.625,
+      "kl": 0.9697335958480835
+    },
+    {
+      "update": 103,
+      "mean_reward": 0.84375,
+      "mixed_group_rate": 0.484375,
+      "kl": 1.0237460136413574
+    },
+    {
+      "update": 104,
+      "mean_reward": 0.796875,
+      "mixed_group_rate": 0.578125,
+      "kl": 0.9309059381484985
+    },
+    {
+      "update": 105,
+      "mean_reward": 0.802734375,
+      "mixed_group_rate": 0.640625,
+      "kl": 0.9487725496292114
+    },
+    {
+      "update": 106,
+      "mean_reward": 0.833984375,
+      "mixed_group_rate": 0.578125,
+      "kl": 0.992059051990509
+    },
+    {
+      "update": 107,
+      "mean_reward": 0.77734375,
+      "mixed_group_rate": 0.671875,
+      "kl": 0.9258466362953186
+    },
+    {
+      "update": 108,
+      "mean_reward": 0.845703125,
+      "mixed_group_rate": 0.578125,
+      "kl": 0.9989917278289795
+    },
+    {
+      "update": 109,
+      "mean_reward": 0.8046875,
+      "mixed_group_rate": 0.609375,
+      "kl": 0.9997000694274902
+    },
+    {
+      "update": 110,
+      "mean_reward": 0.837890625,
+      "mixed_group_rate": 0.5625,
+      "kl": 0.9820451140403748
+    },
+    {
+      "update": 111,
+      "mean_reward": 0.833984375,
+      "mixed_group_rate": 0.5,
+      "kl": 0.9697408676147461
+    },
+    {
+      "update": 112,
+      "mean_reward": 0.830078125,
+      "mixed_group_rate": 0.609375,
+      "kl": 0.9728522300720215
+    },
+    {
+      "update": 113,
+      "mean_reward": 0.77734375,
+      "mixed_group_rate": 0.671875,
+      "kl": 0.9425386786460876
+    },
+    {
+      "update": 114,
+      "mean_reward": 0.82421875,
+      "mixed_group_rate": 0.546875,
+      "kl": 1.0089868307113647
+    },
+    {
+      "update": 115,
+      "mean_reward": 0.8515625,
+      "mixed_group_rate": 0.5,
+      "kl": 1.01472008228302
+    },
+    {
+      "update": 116,
+      "mean_reward": 0.8515625,
+      "mixed_group_rate": 0.46875,
+      "kl": 1.0252457857131958
+    },
+    {
+      "update": 117,
+      "mean_reward": 0.798828125,
+      "mixed_group_rate": 0.65625,
+      "kl": 0.975727915763855
+    },
+    {
+      "update": 118,
+      "mean_reward": 0.84375,
+      "mixed_group_rate": 0.59375,
+      "kl": 1.0021284818649292
+    },
+    {
+      "update": 119,
+      "mean_reward": 0.861328125,
+      "mixed_group_rate": 0.5,
+      "kl": 1.0717132091522217
+    },
+    {
+      "update": 120,
+      "mean_reward": 0.84765625,
+      "mixed_group_rate": 0.46875,
+      "kl": 1.0494228601455688
+    }
+  ],
+  "evaluation": {
+    "before": {
+      "accuracy": 0.25048828125,
+      "correct_action_probability": 0.25
+    },
+    "after": {
+      "accuracy": 0.972900390625,
+      "correct_action_probability": 0.8308780789375305
+    }
+  }
+}

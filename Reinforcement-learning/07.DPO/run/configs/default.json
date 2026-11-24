@@ -1,0 +1,10 @@
+{
+  "train_seed": 42,
+  "eval_seed": 2026,
+  "train_pairs": 4096,
+  "eval_pairs": 4096,
+  "epochs": 16,
+  "batch_size": 128,
+  "learning_rate": 0.03,
+  "beta": 0.5
+}

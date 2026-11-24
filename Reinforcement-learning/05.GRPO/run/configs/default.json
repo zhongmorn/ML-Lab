@@ -1,0 +1,12 @@
+{
+  "train_seed": 42,
+  "eval_seed": 2026,
+  "eval_contexts": 4096,
+  "updates": 120,
+  "contexts_per_update": 64,
+  "group_size": 8,
+  "update_epochs": 4,
+  "learning_rate": 0.03,
+  "clip_epsilon": 0.2,
+  "kl_beta": 0.02
+}

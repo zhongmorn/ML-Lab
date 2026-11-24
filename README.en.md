@@ -20,7 +20,10 @@ ML-Lab
     ├── 01.Q-learning          # Tabular Q-learning
     ├── 02.DQN                 # Deep Q-network
     ├── 03.DDQN                # Double DQN
-    └── 04.PPO                 # PPO-Clip + GAE
+    ├── 04.PPO                 # PPO-Clip + GAE
+    ├── 05.GRPO                # Group Relative Policy Optimization
+    ├── 06.RLHF                # Reward model + PPO
+    └── 07.DPO                 # Direct Preference Optimization
 ```
 
 <br>
@@ -46,6 +49,8 @@ python main.py
 
 Select the PPO configuration in `main.py`.
 
+For GRPO, RLHF, and DPO, run `python main.py` from the corresponding experiment directory.
+
 <br>
 
 ## Experiments
@@ -66,6 +71,9 @@ Select the PPO configuration in `main.py`.
 | [02.DQN](Reinforcement-learning/02.DQN/docs/README.en.md) | Deep Q-Network | CartPole-v1 |
 | [03.DDQN](Reinforcement-learning/03.DDQN/docs/README.en.md) | Double Deep Q-Network | CartPole-v1 |
 | [04.PPO](Reinforcement-learning/04.PPO/docs/README.en.md) | Proximal Policy Optimization (PPO-Clip) | CartPole-v1, Pendulum-v1 |
+| [05.GRPO](Reinforcement-learning/05.GRPO/docs/README.en.md) | Group Relative Policy Optimization | Four-action task with group rewards |
+| [06.RLHF](Reinforcement-learning/06.RLHF/docs/README.en.md) | Reinforcement Learning from Human Feedback | Four-action task with synthetic preferences and a reward model |
+| [07.DPO](Reinforcement-learning/07.DPO/docs/README.en.md) | Direct Preference Optimization | Four-action task with fixed preference pairs |
 
 See `docs/README.en.md` in each experiment directory for the algorithm and results.
 

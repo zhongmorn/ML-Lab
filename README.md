@@ -20,7 +20,10 @@ ML-Lab
     ├── 01.Q-learning          # 表格型 Q-learning
     ├── 02.DQN                 # 深度 Q 网络
     ├── 03.DDQN                # 双重深度 Q 网络
-    └── 04.PPO                 # PPO-Clip + GAE
+    ├── 04.PPO                 # PPO-Clip + GAE
+    ├── 05.GRPO                # 组相对策略优化
+    ├── 06.RLHF                # 奖励模型 + PPO
+    └── 07.DPO                 # 直接偏好优化
 ```
 
 <br>
@@ -46,6 +49,8 @@ python main.py
 
 在 PPO 的 `main.py` 中选择实验配置。
 
+GRPO、RLHF 和 DPO 在各自的实验目录中运行 `python main.py`。
+
 <br>
 
 ## 实验入口
@@ -66,6 +71,9 @@ python main.py
 | [02.DQN](Reinforcement-learning/02.DQN/docs/README.md) | 深度 Q 网络 | CartPole-v1 |
 | [03.DDQN](Reinforcement-learning/03.DDQN/docs/README.md) | 双重深度 Q 网络 | CartPole-v1 |
 | [04.PPO](Reinforcement-learning/04.PPO/docs/README.md) | 近端策略优化（PPO-Clip） | CartPole-v1、Pendulum-v1 |
+| [05.GRPO](Reinforcement-learning/05.GRPO/docs/README.md) | 组相对策略优化 | 四动作任务，使用组内奖励 |
+| [06.RLHF](Reinforcement-learning/06.RLHF/docs/README.md) | 基于人类反馈的强化学习 | 四动作任务，合成偏好与奖励模型 |
+| [07.DPO](Reinforcement-learning/07.DPO/docs/README.md) | 直接偏好优化 | 四动作任务，固定偏好对 |
 
 实验原理和结果见各实验目录中的 `docs/README.md`。
 

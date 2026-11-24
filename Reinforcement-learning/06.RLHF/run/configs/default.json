@@ -1,0 +1,16 @@
+{
+  "train_seed": 42,
+  "eval_seed": 2026,
+  "eval_contexts": 4096,
+  "preference_count": 4096,
+  "reward_epochs": 24,
+  "reward_batch_size": 128,
+  "reward_learning_rate": 0.03,
+  "policy_updates": 160,
+  "contexts_per_update": 128,
+  "policy_epochs": 4,
+  "policy_learning_rate": 0.025,
+  "clip_epsilon": 0.2,
+  "kl_beta": 0.02,
+  "value_coef": 0.5
+}

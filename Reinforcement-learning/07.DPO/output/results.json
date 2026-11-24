@@ -1,0 +1,106 @@
+{
+  "config": {
+    "train_seed": 42,
+    "eval_seed": 2026,
+    "train_pairs": 4096,
+    "eval_pairs": 4096,
+    "epochs": 16,
+    "batch_size": 128,
+    "learning_rate": 0.03,
+    "beta": 0.5
+  },
+  "training": [
+    {
+      "epoch": 1,
+      "loss": 0.5176495909690857,
+      "preference_accuracy": 0.9541015625
+    },
+    {
+      "epoch": 2,
+      "loss": 0.4079860746860504,
+      "preference_accuracy": 0.969970703125
+    },
+    {
+      "epoch": 3,
+      "loss": 0.33988016843795776,
+      "preference_accuracy": 0.978271484375
+    },
+    {
+      "epoch": 4,
+      "loss": 0.2949461042881012,
+      "preference_accuracy": 0.984619140625
+    },
+    {
+      "epoch": 5,
+      "loss": 0.26310011744499207,
+      "preference_accuracy": 0.984130859375
+    },
+    {
+      "epoch": 6,
+      "loss": 0.2392769753932953,
+      "preference_accuracy": 0.9873046875
+    },
+    {
+      "epoch": 7,
+      "loss": 0.22068047523498535,
+      "preference_accuracy": 0.987060546875
+    },
+    {
+      "epoch": 8,
+      "loss": 0.20579680800437927,
+      "preference_accuracy": 0.987060546875
+    },
+    {
+      "epoch": 9,
+      "loss": 0.1934557855129242,
+      "preference_accuracy": 0.98828125
+    },
+    {
+      "epoch": 10,
+      "loss": 0.18302930891513824,
+      "preference_accuracy": 0.988037109375
+    },
+    {
+      "epoch": 11,
+      "loss": 0.17410066723823547,
+      "preference_accuracy": 0.98876953125
+    },
+    {
+      "epoch": 12,
+      "loss": 0.16627399623394012,
+      "preference_accuracy": 0.990966796875
+    },
+    {
+      "epoch": 13,
+      "loss": 0.15944769978523254,
+      "preference_accuracy": 0.98876953125
+    },
+    {
+      "epoch": 14,
+      "loss": 0.15331465005874634,
+      "preference_accuracy": 0.990478515625
+    },
+    {
+      "epoch": 15,
+      "loss": 0.14784398674964905,
+      "preference_accuracy": 0.990478515625
+    },
+    {
+      "epoch": 16,
+      "loss": 0.14289960265159607,
+      "preference_accuracy": 0.990478515625
+    }
+  ],
+  "evaluation": {
+    "before": {
+      "accuracy": 0.25048828125,
+      "chosen_probability": 0.25,
+      "preference_accuracy": 0.0
+    },
+    "after": {
+      "accuracy": 0.966796875,
+      "chosen_probability": 0.8240675330162048,
+      "preference_accuracy": 0.9892578125
+    }
+  }
+}
