@@ -4,6 +4,7 @@
 <br>
 
 ## Running the Example
+
 [neural_network.py](../neural_network.py) uses NumPy to demonstrate a fully connected 3→3→3 network. Run these commands from the experiment directory.
 
 ```bash
@@ -14,6 +15,7 @@ python neural_network.py
 <br>
 
 ## Worked Numerical Example
+
 ![The 3→3→3 network. Solid arrows lead from the input through the hidden layer to the output and loss. Dashed arrows trace the gradient from the loss back through the output layer to the hidden layer.](network-3-3-3.svg)
 
 Each group of connections between layers corresponds to a weight matrix. Forward propagation computes $x\to h\to\hat y$ and then uses $\hat y$ and the target $y$ to calculate $L$. Backpropagation starts from $L$ and computes $d_2=\partial L/\partial z_2$ followed by $d_1=\partial L/\partial z_1$.
@@ -51,6 +53,7 @@ W_2 = \begin{bmatrix}
 $$
 
 The matrix $W_1$ connects the input and hidden layers, and $W_2$ connects the hidden and output layers. Each row of a weight matrix corresponds to a unit in the preceding layer, and each column corresponds to a unit in the next layer. The code stores a single example as a $1\times 3$ row vector. The symbol $\approx$ marks rounded values.
+
 ### 2. Forward Propagation
 **Input layer to hidden layer.** Compute $z_1=xW_1+b_1$. The initial bias is zero, so take a separate weighted sum using each of the three columns of $W_1$.
 
@@ -83,6 +86,7 @@ $$
 $$
 
 In the code, `output_input = hidden @ w2 + b2` computes $z_2$ and `predictions = sigmoid(output_input)` computes $\hat y$. [Output-layer code](../neural_network.py#L14-L15)
+
 ### 3. Computing the Loss
 Use the forward prediction $\hat y$ and the target $y$ to compute half the squared error. The code averages over the number of examples, which is one here.
 
@@ -95,6 +99,7 @@ L &= \tfrac12\sum_{j=1}^{3}(\hat y_j-y_j)^2\\
 $$
 
 The code uses `0.5 * np.sum((predictions - y) ** 2) / len(y)`. [Loss function](../neural_network.py#L19-L21)
+
 ### 4. Backpropagation
 **Compute the output-layer gradient first.** The derivative of sigmoid is $\sigma'(z)=\sigma(z)(1-\sigma(z))$. Use the chain rule to propagate the loss gradient from the output to the weighted sum $z_2$. The symbol $\odot$ denotes elementwise multiplication.
 
@@ -156,6 +161,7 @@ $$
 $$
 
 The code uses `grad_w1 = x.T @ hidden_delta` and `grad_b1 = hidden_delta.sum(axis=0)`. [Hidden-layer parameter gradients](../neural_network.py#L30-L31)
+
 ### 5. Updating the Parameters Once
 After computing the gradients for both layers, update each parameter with $\theta_{\mathrm{new}}=\theta-\eta\,\partial L/\partial\theta$. The example shows the update for two weights and one bias.
 
@@ -174,6 +180,7 @@ The code uses `parameter -= learning_rate * gradient`. A second forward pass wit
 <br>
 
 ## Forward and Backward Derivation
+
 This derivation uses neuron indices for the same network and omits the biases from the equations.
 ### 1. Notation
 

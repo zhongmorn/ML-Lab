@@ -13,9 +13,7 @@ This PyTorch implementation combines PPO-Clip with generalized advantage estimat
 ├── requirements.txt
 ├── run/
 │   ├── agent.py                 # Actor, critic, distributions, configuration, rollouts, GAE, training, and evaluation
-│   └── configs/
-│       ├── cartpole.json
-│       └── pendulum.json
+│   └── configs.json              # Training profiles keyed by environment ID
 ├── tools/
 │   ├── seed.py                  # Sets random seeds
 │   ├── save.py                  # Saves parameters and logs
@@ -23,9 +21,21 @@ This PyTorch implementation combines PPO-Clip with generalized advantage estimat
 └── output/                     # Experiment results
 ```
 
+### Running the Experiment
+Set `ENV_ID` in `main.py` to `CartPole-v1` or `Pendulum-v1`. Edit the training parameters in the matching entry in `run/configs.json`. Set `MODE` to `train` and choose a `RUN_NUMBER` for the new experiment. The defaults save results to `output/CartPole-v1/seed42_run2/`.
+
+Run this command from the `04.PPO` directory.
+
+```bash
+python main.py
+```
+
+To evaluate a saved model, set `MODE` to `evaluate` and set `RUN_DIR` and `CHECKPOINT`. To redraw the plots for an existing run, set `MODE` to `plot` and set `RUN_DIR`.
+
 <br>
 
 ## 2. How PPO Works
+
 ### Objective and Advantage
 The policy $\pi_\theta(a\mid s)$ maximizes the expected discounted return. The advantage weights each action's contribution to the policy gradient.
 
@@ -36,6 +46,7 @@ J(\theta)=\mathbb E_{\tau\sim\pi_\theta}\left[\sum_{t=0}^{T-1}\gamma^t r_t\right
 $$
 
 The advantage $A^\pi(s,a)=Q^\pi(s,a)-V^\pi(s)$ measures how an action compares with the policy's average performance in that state. The actor learns action probabilities, and the critic estimates state values.
+
 ### GAE
 GAE uses temporal-difference residuals to compute advantages recursively and form value targets.
 
@@ -61,6 +72,7 @@ In `compute_gae` in [`run/agent.py`](../run/agent.py), $b_t$ is `bootstrap` and 
 A true termination sets the bootstrap term to zero. A time-limit truncation uses the value of the final state before reset, while the advantage recursion stops at the episode boundary. The end of a rollout also uses the next state's value. The implementation computes $\hat R_t$ first and then normalizes the advantages across the batch, preserving the value targets.
 
 `reward_scale` scales the training rewards that enter GAE. Logs and reward plots use the environment's raw returns.
+
 ### Probability Ratio
 The probability ratio compares the old and current policies for the **same sampled action in the same state** when the old policy assigns it nonzero probability.
 
@@ -73,6 +85,7 @@ $$
 The old policy $\pi_{\mathrm{old}}$ collected the current round's trajectories. The current policy $\pi_\theta$ changes with each gradient update. Discrete actions use probabilities, and continuous actions use probability densities.
 
 If the old policy assigns an action probability 0.2 and the current policy assigns it 0.3, then $\rho_t=1.5$, a 50% relative increase. A ratio $\rho_t>1$ means the action becomes more likely, $\rho_t<1$ means it becomes less likely, and $\rho_t=1$ means its probability stays the same. The estimated advantage $\hat A_t$ determines which direction the update favors.
+
 #### Why Divide by the Old Policy Probability?
 The update uses data collected by the old policy. For a fixed state $s$, treat the advantage estimate $\hat A(s,a)$ as a fixed function and assume the old policy covers every action the current policy can choose.
 
@@ -98,6 +111,7 @@ L^{\mathrm{PG}}(\theta)
 $$
 
 where $d_{\mathrm{old}}$ is the old policy's state visitation distribution. This implementation estimates the objective by averaging samples from the current rollout. The identity changes the action distribution at a fixed state. PPO retains the old policy's state distribution and advantage estimates, so the result is a surrogate for the new policy's long-term return. [PPO paper](https://arxiv.org/abs/1707.06347)
+
 #### How the Ratio Affects the Policy Update
 Maximizing $\rho_t\hat A_t$ favors increasing an action's probability when its advantage is positive and decreasing it when its advantage is negative. Holding the old probability and the advantage fixed gives the following gradient.
 
@@ -107,6 +121,7 @@ $$
 $$
 
 The policies coincide at the start of the update, so $\rho_t=1$. The gradient can still be nonzero and takes the usual sample-based policy-gradient form. As the current policy changes, the ratio measures how the action probability has shifted since sampling. The clipping objective uses this ratio to control the incentive for larger changes.
+
 #### Why Subtract Log Probabilities and Exponentiate?
 The identity $\log p-\log q=\log(p/q)$ makes the two forms mathematically equivalent. The network computes the action's `log_prob` directly. Sampling stores `old_log_prob`, and the update recomputes `new_log_prob` for the same action.
 
@@ -118,6 +133,7 @@ ratio = log_ratio.exp()
 Computing the difference avoids reconstructing two potentially tiny probabilities before dividing. The continuous action distribution has independent dimensions, so the joint log probability is a sum across dimensions. The update holds `old_log_prob` and the advantage fixed, and the gradient flows through `new_log_prob` to the current policy.
 
 This form improves numerical behavior. Very large log differences can still make the exponential overflow. The clipping objective and KL monitoring handle policy changes as described below.
+
 ### Clipped Objective and Total Loss
 PPO applies clipping to the ratio-weighted advantage objective.
 
@@ -145,6 +161,7 @@ Collect rollout → compute GAE → normalize advantages → update over several
 ```
 
 PPO is usually classified as an online, on-policy algorithm because it reuses the newly collected data for a limited number of updates in each round.
+
 ### Action Distributions
 The discrete actor outputs logits and uses `Categorical`. The continuous actor samples from a Gaussian and applies tanh to fit the action bounds.
 
@@ -299,4 +316,5 @@ Each environment has one rerun with training seed 42. Reproducibility across tra
 <br>
 
 ## 4. References
+
 [PPO paper](https://arxiv.org/abs/1707.06347) · [GAE paper](https://arxiv.org/abs/1506.02438) · [Gymnasium termination and truncation](https://gymnasium.farama.org/tutorials/gymnasium_basics/handling_time_limits/)

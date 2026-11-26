@@ -11,8 +11,7 @@
 ├── requirements.txt         # Python dependencies
 ├── run
 │   ├── agent.py             # Reward model and PPO policy update
-│   └── configs
-│       └── default.json     # Experiment settings
+│   └── configs.json         # Experiment settings
 ├── tools
 │   └── plot.py              # Draw training curves
 └── output                   # Experiment results
@@ -21,11 +20,13 @@
 <br>
 
 ## Task
+
 Reinforcement learning from human feedback fits a reward model to preference data and uses that reward to update the policy. This example uses the same four-action, single-step task as GRPO. Each input $(x,y)$ is sampled uniformly from $[-1,1]^2$. Two diagonals divide the plane into four regions. The task rule generates synthetic preferences. The chosen action $a^+$ is the correct action for the region, and the rejected action $a^-$ is drawn uniformly from the other three. The initial policy samples uniformly across the four actions. The experiment fits the reward model and then updates the policy. [InstructGPT paper](https://arxiv.org/abs/2203.02155)
 
 <br>
 
 ## Algorithm
+
 ### Fit the reward model
 The reward model outputs four scores $r_\phi(s,a)$ for an input $s$. The Bradley–Terry model expresses the probability that an action wins as the sigmoid of the score difference. The negative log-likelihood is computed as `softplus(-margin)`.
 
@@ -55,11 +56,12 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-The default training seed is 42. The reward model trains for 24 epochs on 4,096 fixed pairs. PPO then runs for 160 batches of 128 new inputs each. [Default configuration](../run/configs/default.json)
+The default training seed is 42. The reward model trains for 24 epochs on 4,096 fixed pairs. PPO then runs for 160 batches of 128 new inputs each. [Default configuration](../run/configs.json)
 
 <br>
 
 ## Results
+
 Evaluation uses 4,096 independent test inputs generated with seed 2026. The reward model reaches **99.46%** ranking accuracy on the corresponding preference pairs. Both policy evaluations use the same inputs. Greedy accuracy selects the highest-probability action and breaks initial ties by choosing the first action.
 
 | Policy | Greedy accuracy | Mean probability of the correct action |

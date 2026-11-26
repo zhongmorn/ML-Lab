@@ -11,8 +11,7 @@
 ├── requirements.txt         # Python dependencies
 ├── run
 │   ├── agent.py             # GRPO policy update
-│   └── configs
-│       └── default.json     # Experiment settings
+│   └── configs.json         # Experiment settings
 ├── tools
 │   └── plot.py              # Training plot
 └── output                   # Experiment results
@@ -21,6 +20,7 @@
 <br>
 
 ## Task
+
 This experiment uses a one-step contextual bandit with four actions. Each input is a point $(x,y)$ drawn uniformly from $[-1,1]^2$. The two diagonals divide the plane into four regions numbered from $0$ to $3$. The policy uses a linear layer to score the actions. The correct action earns $1$ and all others earn $0$.
 
 $$
@@ -30,6 +30,7 @@ $$
 <br>
 
 ## GRPO update
+
 For each input $s$, sample $G$ actions with replacement from the sampling policy $\pi_{\mathrm{old}}$. Compute each action's advantage from the reward mean $\bar r$ and population standard deviation $\sigma_r$ within the group for that input. Groups with identical rewards have zero advantage. The denominator floor $\delta=10^{-8}$ corresponds to `clamp_min(1e-8)`.
 
 $$
@@ -58,11 +59,12 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-The default experiment runs 120 batches with 64 inputs per batch and 8 actions per input. It takes 4 optimizer steps on each batch. The learning rate is $0.03$, the clip range is $0.2$, the KL coefficient is $0.02$, and the training seed is 42. [Default configuration](../run/configs/default.json)
+The default experiment runs 120 batches with 64 inputs per batch and 8 actions per input. It takes 4 optimizer steps on each batch. The learning rate is $0.03$, the clip range is $0.2$, the KL coefficient is $0.02$, and the training seed is 42. [Default configuration](../run/configs.json)
 
 <br>
 
 ## Experiment results
+
 Both evaluations use the same 4,096 independent test inputs generated with seed 2026. Greedy accuracy measures how often the highest-probability action is correct. The average probability of the correct action also gives the expected reward when sampling from the policy. All four actions start with the same probability, and greedy evaluation breaks ties by taking the first action.
 
 | Policy | Greedy accuracy | Mean probability of the correct action |

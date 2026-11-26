@@ -1,7 +1,7 @@
 import torch
 
 from tools.batch import encode
-from .configs import EVAL_DATA, MAX_NEW_TOKENS
+from .config import EVAL_DATA, MAX_NEW_TOKENS
 from .model import TransformerLM
 
 

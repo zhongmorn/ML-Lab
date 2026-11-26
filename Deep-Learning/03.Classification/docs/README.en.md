@@ -52,6 +52,7 @@ python -m run.analyze
 <br>
 
 ## Introduction
+
 Classification asks which category an input belongs to. Common examples include:
 
 - Does this email belong in the spam folder?
@@ -108,6 +109,7 @@ For example, among predictions for which a classifier assigns a probability of 0
 <br>
 
 ## Softmax
+
 Softmax converts logits to a probability distribution and is differentiable. Exponentiating each logit produces a positive value. Dividing each value by their sum makes the resulting probabilities sum to 1.
 
 $$
@@ -127,6 +129,7 @@ Softmax regression is a linear model because its class scores come from an affin
 <br>
 
 ## Loss Function
+
 For a label $\mathbf{y}$ and a prediction $\hat{\mathbf{y}}$, the cross-entropy loss is
 
 $$
@@ -140,6 +143,7 @@ In practice, label noise can introduce mislabeled examples, and the input featur
 <br>
 
 ## Softmax and Its Derivative
+
 Using the softmax definition, we can write the cross-entropy loss in terms of logits.
 
 $$
@@ -197,6 +201,7 @@ criterion = nn.CrossEntropyLoss()
 <br>
 
 ## Experiment Settings and Results
+
 Both experiments hold out 600 images per class from the official training set, leaving 54,000 images for training and 6,000 for validation. Each uses seed 42, a batch size of 64, a learning rate of 0.001, and two CPU threads for 100 epochs. Each experiment resets the data loader and model seeds to use the same data split, initial parameters, and training sample order. It converts images to tensors and normalizes them once before each experiment's training, then reuses them across epochs.
 
 Training loss and accuracy aggregate predictions made before each batch update. Validation metrics are computed at the end of each epoch. Loss is cross-entropy averaged over samples. At epochs 10 and 100, each experiment evaluates the official 10,000-image test set and saves predictions for the same first 10 test images.

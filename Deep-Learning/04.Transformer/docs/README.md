@@ -12,7 +12,8 @@
 ├── main.py
 ├── requirements.txt
 ├── run/
-│   ├── configs/
+│   ├── configs.json          # 模型、训练和生成参数
+│   ├── config.py             # 读取配置
 │   ├── model.py
 │   ├── train.py
 │   └── predict.py
@@ -200,7 +201,7 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-运行 `main.py` 默认从 `data/train.txt` 训练。把 `main.py` 顶部的 `PREDICT_ONLY` 改为 `True`，会加载权重并读取 `data/eval.txt`，也可在 `QUESTION` 中填入要预测的问题。模型尺寸、训练步数、种子和预测长度都在配置文件中设置。[run/configs/__init__.py](../run/configs/__init__.py)
+运行 `main.py` 默认从 `data/train.txt` 训练。把 `main.py` 顶部的 `PREDICT_ONLY` 改为 `True`，会加载权重并读取 `data/eval.txt`，也可在 `QUESTION` 中填入要预测的问题。模型尺寸、训练步数、种子和预测长度集中在同一份配置文件。[run/configs.json](../run/configs.json)
 
 本次输出包含[实验记录](../output/results.json)和[模型权重](../output/weights.pt)。下方两张图对应 1,200 步的运行。
 

@@ -1,0 +1,52 @@
+{
+  "algorithm": "XGBoost",
+  "dataset": "Breast Cancer Wisconsin (Diagnostic)",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "random_state": 42
+  },
+  "metrics": {
+    "train": {
+      "samples": 341,
+      "correct": 341,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "log_loss": 0.012545443139970303
+    },
+    "validation": {
+      "samples": 114,
+      "correct": 108,
+      "accuracy": 0.9473684210526315,
+      "precision": 0.9302325581395349,
+      "recall": 0.9302325581395349,
+      "f1": 0.9302325581395349,
+      "roc_auc": 0.9918113331149689,
+      "log_loss": 0.12178465723991394
+    },
+    "test": {
+      "samples": 114,
+      "correct": 111,
+      "accuracy": 0.9736842105263158,
+      "precision": 1.0,
+      "recall": 0.9285714285714286,
+      "f1": 0.9629629629629629,
+      "roc_auc": 0.9917328042328042,
+      "log_loss": 0.08887650072574615
+    }
+  },
+  "test_confusion_matrix": [
+    [
+      72,
+      0
+    ],
+    [
+      3,
+      39
+    ]
+  ]
+}

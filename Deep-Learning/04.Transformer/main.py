@@ -1,6 +1,6 @@
 import torch
 
-from run.configs import CHECKPOINT, CPU_THREADS
+from run.config import CHECKPOINT, CPU_THREADS
 from run.predict import evaluate, load_model
 from run.train import train
 

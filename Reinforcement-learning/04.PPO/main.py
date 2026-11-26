@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parent
 
 # 选择 train、evaluate 或 plot。
 MODE = "train"
-CONFIG = ROOT / "run/configs/cartpole.json"
+ENV_ID = "CartPole-v1"
+CONFIG = ROOT / "run/configs.json"
 # 当前结果为 seed42_run1；下一次新实验写入 seed42_run2。
 RUN_NUMBER = 2
 
@@ -28,7 +29,7 @@ RENDER = False
 
 def main():
     if MODE == "train":
-        config = PPOConfig.from_json(CONFIG)
+        config = PPOConfig.from_json(CONFIG, env_id=ENV_ID)
         run_name = f"seed{config.seed}"
         if RUN_NUMBER is not None:
             if RUN_NUMBER < 1:

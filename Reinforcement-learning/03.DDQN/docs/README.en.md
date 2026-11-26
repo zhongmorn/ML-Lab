@@ -12,10 +12,10 @@
 ├── requirements.txt
 ├── run
 │   ├── agent.py              # Q-networks and DDQN update
+│   ├── configs.json          # CartPole settings
+│   ├── configs.py            # Configuration loader
 │   ├── replay.py             # Experience replay buffer
-│   ├── model.py              # Training, validation, evaluation, and demo recording
-│   └── configs
-│       └── cartpole.json
+│   └── model.py              # Training, validation, evaluation, and demo recording
 └── tools
     ├── seed.py               # Random seeding
     └── plot.py               # Training, validation, evaluation plots, and GIFs
@@ -24,6 +24,7 @@
 <br>
 
 ## Run the Experiment
+
 From the repository root, run these commands.
 
 ```bash
@@ -36,18 +37,20 @@ By default, DDQN completes 300 training episodes on CartPole-v1 and saves result
 
 `results.json` contains the configuration, training, validation, and both evaluations. `weights.pt`, `evaluation.png`, and `demo.gif` show the selected policy. `final_weights.pt` holds the model at the end of training.
 
-In `run/configs/cartpole.json`, set the number of training rounds with `train_episodes`. The default is 300 rounds. Each round is one complete episode, ending on `terminated` or `truncated`, with the environment's own time limit retained. The progress bar totals 300 episodes and advances once per completed episode. The training seed `seed` defaults to 42 and initializes the PyTorch, NumPy, and Python random number generators. Only the first training episode calls `reset(seed=42)`; later episodes continue the environment's random sequence. Both the selected and final checkpoints use `eval_seed + i` for test episodes, with 50 distinct seeds, 20000–20049, by default, separate from validation. Fixed seeds make runs reproducible; they do not force identical episode returns.
+In [run/configs.json](../run/configs.json), set the number of training rounds with `train_episodes`. The default is 300 rounds. Each round is one complete episode, ending on `terminated` or `truncated`, with the environment's own time limit retained. The progress bar totals 300 episodes and advances once per completed episode. The training seed `seed` defaults to 42 and initializes the PyTorch, NumPy, and Python random number generators. Only the first training episode calls `reset(seed=42)`; later episodes continue the environment's random sequence. Both the selected and final checkpoints use `eval_seed + i` for test episodes, with 50 distinct seeds, 20000–20049, by default, separate from validation. Fixed seeds make runs reproducible; they do not force identical episode returns.
 
 Adam uses the fixed learning rate in `lr` throughout training, without a learning rate schedule: `3e-3` (0.003). `epsilon_decay` only decays the exploration rate after each episode; it does not change the learning rate.
 
 <br>
 
 ## How Double DQN Works
+
 DQN computes its TD target using the largest Q-value from the target network. Selecting and evaluating an action with the same estimates favors estimates with positive errors, which can cause overestimation. Double DQN (DDQN) keeps experience replay and the target network, selects the action with the online network, and evaluates that action with the target network.
 
 <br>
 
 ## DQN and DDQN
+
 In the table, $d_i$ is the `terminated` flag stored in replay, $\theta$ and $\theta^-$ denote the online and target network parameters, and $\gamma$ is the discount factor.
 
 | Aspect | DQN | DDQN |
@@ -61,6 +64,7 @@ In the table, $d_i$ is the `terminated` flag stored in replay, $\theta$ and $\th
 <br>
 
 ## Action Selection, Targets, and Loss
+
 The online network (`q_net`) selects the action with the highest Q-value in the next state. `run/agent.py` stores the action in `max_next_action`.
 
 $$
@@ -92,11 +96,13 @@ $$
 <br>
 
 ## When to Use It
+
 DDQN can reduce overestimation while keeping the DQN network architecture. This example trains on the discrete actions of CartPole-v1. Its target calculation can be combined with prioritized experience replay (PER) and dueling networks, as in Rainbow.
 
 <br>
 
 ## Fixed Learning Rate, 300-Episode Results
+
 These results come from a fresh run of the current code completed on 2026-11-20: 300 complete CartPole-v1 training episodes, training seed 42, Adam learning rate fixed at `0.003`, and mean squared error loss. Configured hyperparameters match the DQN example except for the training budget: 300 episodes for DDQN and 500 for DQN. The run used PyTorch 2.11.0+cu128, Gymnasium 1.3.0, and CUDA, with one CPU computation thread. All 300 episode records in `training` show a learning rate of `0.003`.
 
 | Complete training episodes | Actual environment steps | Last-50 mean training return | Selected checkpoint | Best validation mean |

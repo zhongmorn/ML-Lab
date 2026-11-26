@@ -24,6 +24,7 @@
 <br>
 
 ## Introduction
+
 Regression models the relationship between one or more independent variables and a dependent variable.
 Researchers in the natural and social sciences often use regression to describe how inputs relate to outputs.
 
@@ -43,6 +44,7 @@ Prediction is a broader category that also includes tasks such as classification
 <br>
 
 ## Linear Regression Basics
+
 Linear regression is one of the simplest and most widely used regression methods. The model described here makes two assumptions.
 
 1. The independent variables $\mathbf{x}$ and the dependent variable $y$ have a **linear relationship**.
@@ -68,6 +70,7 @@ With floor area as the only input, a straight line can fit the simulated house p
 <br>
 
 ## Linear Model
+
 The model predicts the house price as a weighted sum of features with a bias.
 
 $$
@@ -104,6 +107,7 @@ Training finds $\mathbf{w}, b$ that make the predictions as close to the labels 
 <br>
 
 ## Loss Function
+
 The loss function quantifies the **difference between predictions and targets**.
 
 A common regression objective is squared error. Here the definition includes a factor of one half.
@@ -130,6 +134,7 @@ In the experiments, [`run/train.py`](../run/train.py#L16) uses `nn.MSELoss()` to
 <br>
 
 ## Analytical Solution
+
 Linear regression is one of the few models with a **closed-form solution**.
 
 Fold the bias into the design matrix and minimize $\|\mathbf{y}-\mathbf{X}\mathbf{w}\|^2$. When $\mathbf{X}^\top \mathbf{X}$ is invertible, the solution is
@@ -145,6 +150,7 @@ This closed-form solution applies to least-squares linear regression. Deep model
 <br>
 
 ## Stochastic Gradient Descent (SGD)
+
 Gradient descent optimizes deep learning models by updating parameters in the direction that decreases the loss.
 
 In practice, **minibatch SGD** computes the gradient for a small random subset of samples at each step, reducing computation per update and averaging over several samples.
@@ -178,6 +184,7 @@ Training proceeds as follows.
 <br>
 
 ## Experimental Results
+
 Run these commands from the repository root. Set `MODE` to `"train"` at the top of the entry point to run the default experiment, which writes scatter plots and training loss curves to `output` in the regression example.
 
 ```bash

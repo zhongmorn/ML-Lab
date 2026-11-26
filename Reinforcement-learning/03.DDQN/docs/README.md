@@ -12,10 +12,10 @@
 ├── requirements.txt
 ├── run
 │   ├── agent.py              # Q 网络与 DDQN 更新
+│   ├── configs.json          # CartPole 实验参数
+│   ├── configs.py            # 读取实验配置
 │   ├── replay.py             # 经验回放池
-│   ├── model.py              # 训练、验证、评估和 GIF 录制
-│   └── configs
-│       └── cartpole.json
+│   └── model.py              # 训练、验证、评估和 GIF 录制
 └── tools
     ├── seed.py               # 随机种子
     └── plot.py               # 训练曲线、验证曲线、评估图和 GIF
@@ -36,7 +36,7 @@ python main.py
 
 `results.json` 汇总配置、训练、验证和两组评估结果。`weights.pt`、`evaluation.png` 和 `demo.gif` 对应验证选中的策略。`final_weights.pt` 保存训练结束时的模型。
 
-在 `run/configs/cartpole.json` 中，用 `train_episodes` 设置训练轮次，默认训练 300 轮。一轮就是一个完整回合，直到环境返回 `terminated` 或 `truncated`，保留环境本身的回合时限。进度条总数为 300，每完成一轮更新一次。训练种子 `seed` 默认为 42，用于初始化 PyTorch、NumPy 和 Python 的随机数生成器。只有训练首回合调用 `reset(seed=42)`，之后的回合继续使用环境的随机数序列。选中检查点与训练结束检查点都按 `eval_seed + i` 重置测试回合，默认用 20000–20049 这 50 个不同种子，与验证种子分开。固定种子便于复现，不会强制各回合得到相同回报。
+在 [run/configs.json](../run/configs.json) 中，用 `train_episodes` 设置训练轮次，默认训练 300 轮。一轮就是一个完整回合，直到环境返回 `terminated` 或 `truncated`，保留环境本身的回合时限。进度条总数为 300，每完成一轮更新一次。训练种子 `seed` 默认为 42，用于初始化 PyTorch、NumPy 和 Python 的随机数生成器。只有训练首回合调用 `reset(seed=42)`，之后的回合继续使用环境的随机数序列。选中检查点与训练结束检查点都按 `eval_seed + i` 重置测试回合，默认用 20000–20049 这 50 个不同种子，与验证种子分开。固定种子便于复现，不会强制各回合得到相同回报。
 
 Adam 的学习率由 `lr` 设置，训练全程固定，不使用学习率衰减：默认值为 `3e-3`（0.003）。`epsilon_decay` 只控制探索率的逐回合衰减，不改变学习率。
 

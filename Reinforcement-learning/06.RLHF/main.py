@@ -35,7 +35,7 @@ def evaluate(policy, contexts, correct):
 
 
 def main():
-    config = json.loads((ROOT / "run/configs/default.json").read_text(encoding="utf-8"))
+    config = json.loads((ROOT / "run/configs.json").read_text(encoding="utf-8"))
     torch.set_num_threads(1)
     torch.manual_seed(config["train_seed"])
     train_generator = torch.Generator().manual_seed(config["train_seed"])

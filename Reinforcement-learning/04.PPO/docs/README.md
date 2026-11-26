@@ -13,15 +13,24 @@ PyTorch 实现 PPO-Clip + GAE，支持离散动作和有限边界的连续动作
 ├── requirements.txt
 ├── run/
 │   ├── agent.py                 # Actor/Critic、动作分布、配置、Rollout、GAE、训练与评估
-│   └── configs/
-│       ├── cartpole.json
-│       └── pendulum.json
+│   └── configs.json              # 按环境 ID 保存训练配置
 ├── tools/
 │   ├── seed.py                  # 随机种子
 │   ├── save.py                  # 参数与日志保存
 │   └── plot.py                  # Train、Eval、Loss
 └── output/                     # 实验结果
 ```
+
+### 运行
+在 `main.py` 中用 `ENV_ID` 选择 `CartPole-v1` 或 `Pendulum-v1`。训练参数位于 `run/configs.json` 对应的环境条目。将 `MODE` 设为 `train`，并为新实验设置 `RUN_NUMBER`。默认设置将结果写入 `output/CartPole-v1/seed42_run2/`。
+
+在 `04.PPO` 目录下运行：
+
+```bash
+python main.py
+```
+
+评估已有模型时，将 `MODE` 设为 `evaluate` 并设置 `RUN_DIR` 和 `CHECKPOINT`。重新生成已有实验的图表时，将 `MODE` 设为 `plot` 并设置 `RUN_DIR`。
 
 <br>
 

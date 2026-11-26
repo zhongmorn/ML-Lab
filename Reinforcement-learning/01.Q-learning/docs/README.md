@@ -18,10 +18,9 @@
 ├── run/
 │   ├── agent.py             # Q 表、动作选择与更新
 │   ├── baseline.py          # 无打滑最短路规划
-│   ├── experiment.py        # 训练、评估与保存指标
-│   └── configs/
-│       ├── default.json         # 地图文件、奖励与实验参数
-│       └── reward_ablation.json # 普通步奖励覆盖项
+│   ├── configs.json         # 迷宫、训练、评估与消融参数
+│   ├── configs.py           # 读取实验配置
+│   └── experiment.py        # 训练、评估与保存指标
 ├── tools/
 │   └── plot.py              # 训练曲线与路线图
 └── output/                 # 实验结果
@@ -100,11 +99,11 @@ $\alpha$ 是学习率。`terminated` 为真时，目标只取即时奖励。其�
 ```bash
 cd Reinforcement-learning/01.Q-learning
 python -m pip install -r requirements.txt
-python main.py
+python -c 'from pathlib import Path; from run.experiment import run_experiment; run_experiment(Path("output"))'
 ```
 
 ### 设置
-`main.py` 自动读取 [run/configs/default.json](../run/configs/default.json)。修改 `maze.layout` 即可调整迷宫布局。地图须为方形，并各有一个 `S`（起点）和 `G`（食物）。`#` 表示墙，`X` 表示陷阱，`.` 表示可通行的格子。
+默认实验和奖励消融均读取 [run/configs.json](../run/configs.json)。修改 `maze.layout` 即可调整迷宫布局。地图须为方形，并各有一个 `S`（起点）和 `G`（食物）。`#` 表示墙，`X` 表示陷阱，`.` 表示可通行的格子。
 
 `maze` 也设置奖励、打滑概率和步数上限，`training` 和 `evaluation` 分别设置训练和评估，`reporting` 设置滑动统计窗口。
 
@@ -150,11 +149,11 @@ $$
 ## 奖励消融
 比较普通步奖励 $-1$ 和 $0$。撞墙或越界原地停留时也按普通步计分，两组的陷阱奖励都是 $-10$，食物奖励都是 $+100$。两组从全零 Q 表分别训练，采用相同的 8×8 迷宫、打滑概率、纯贪心策略、随机种子、训练回合数和评估回合数。
 
-在 `Reinforcement-learning/01.Q-learning` 下运行。消融入口在默认配置上应用 [普通步奖励覆盖项](../run/configs/reward_ablation.json)，将结果写入 `output/reward_ablation/`。
+在 `Reinforcement-learning/01.Q-learning` 下运行以下命令，复现两组结果。第一条命令使用 `maze.step_reward`，结果写入 `output/`。`main.py` 使用 `reward_ablation.step_reward`，结果写入 `output/reward_ablation/`。两组参数都在 [run/configs.json](../run/configs.json) 中。
 
 ```bash
+python -c 'from pathlib import Path; from run.experiment import run_experiment; run_experiment(Path("output"))'
 python main.py
-python reward_ablation.py
 ```
 
 | 普通步奖励 | 到达食物 | 踩到陷阱 | 超时 | 平均成功步数 | 按各自奖励的平均回报 | 统一按普通步 −1 计分的平均回报 |

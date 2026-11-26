@@ -18,10 +18,9 @@ Use tabular Q-learning to guide a cat through a slippery 8×8 maze. It starts in
 ├── run/
 │   ├── agent.py             # Q-table, action selection, and updates
 │   ├── baseline.py          # Shortest-path planner without slipping
-│   ├── experiment.py        # Training, evaluation, and metrics
-│   └── configs/
-│       ├── default.json         # Layout file, rewards, and experiment settings
-│       └── reward_ablation.json # Ordinary-step reward override
+│   ├── configs.json         # Maze, training, evaluation, and ablation settings
+│   ├── configs.py           # Configuration loader
+│   └── experiment.py        # Training, evaluation, and metrics
 ├── tools/
 │   └── plot.py              # Learning curve and route plot
 └── output/                 # Experiment results
@@ -61,10 +60,12 @@ In the illustration, $s_0$ is the question “Where is Shanghai?” and action $
 <br>
 
 ## Q-Learning
+
 ### Q-Table and Action Selection
 $Q(s,a)$ estimates the expected discounted return from taking action $a$ in state $s$ and following the optimal policy thereafter. `q_table` stores these estimates by `(row, column, action)`. The 8×8 maze uses a table of shape $8\times8\times4$ with all entries initialized to zero.
 
 Training and evaluation both use a purely greedy policy. At each step the agent chooses $a_t=\arg\max_a Q(s_t,a)$, the action with the highest Q-value in the current cell. Ties go to the first action in the order up, right, down, left. The Q-table determines the intended direction, and a slip can change where the cat actually moves.
+
 ### Update Rule and Code
 After each step, the implementation receives `state`, `action`, `reward`, `next_state`, and `terminated`. The `action` is the agent's intended move. A slip can change the `next_state` and `reward` returned by the environment. Training uses the resulting transition to update the Q-value for the intended action. The code calls $y_t$ `target`.
 
@@ -85,6 +86,7 @@ $\alpha$ is the learning rate. When `terminated` is true, the target is the imme
 <br>
 
 ## Experiment
+
 ### Slippery 8×8 Maze
 
 | Maze layout |
@@ -94,17 +96,18 @@ $\alpha$ is the learning rate. When `terminated` is true, the target is the imme
 At each step the agent chooses up, right, down, or left. The environment moves in the intended direction with probability 80%. It slips to the perpendicular direction on the left with probability 10% and to the one on the right with probability 10%. For example, choosing right can move the cat up or down instead.
 
 In the default experiment, moving into an open cell gives $-1$. A move into a wall or out of bounds keeps the cat in its current cell and also gives $-1$. Reaching food earns $+100$, and entering a trap earns $-10$. Both end the episode. Each episode lasts at most 100 steps. If step 100 ends in an ordinary cell, the episode times out with a total return of $-100$. The update for that step still uses the maximum next-state Q-value.
+
 ### Run
 Run these commands from the repository root.
 
 ```bash
 cd Reinforcement-learning/01.Q-learning
 python -m pip install -r requirements.txt
-python main.py
+python -c 'from pathlib import Path; from run.experiment import run_experiment; run_experiment(Path("output"))'
 ```
 
 ### Settings
-`main.py` loads [run/configs/default.json](../run/configs/default.json). Edit `maze.layout` to change the layout. Keep the grid square with one `S` for the start and one `G` for food. Use `#` for a wall, `X` for a trap, and `.` for an open cell.
+Both runs read [run/configs.json](../run/configs.json). Edit `maze.layout` to change the layout. Keep the grid square with one `S` for the start and one `G` for food. Use `#` for a wall, `X` for a trap, and `.` for an open cell.
 
 The `maze` section also sets rewards, slip probability, and the step limit. The `training` and `evaluation` sections control their respective runs, and `reporting` sets the rolling window.
 
@@ -148,13 +151,14 @@ The [experiment records](../output/results.json) include training and evaluation
 <br>
 
 ## Reward Ablation
+
 Compare ordinary-step rewards of $-1$ and $0$. An attempted move into a wall or out of bounds receives the ordinary-step reward. Both conditions give $-10$ for a trap and $+100$ for reaching the food. Each condition trains separately from a zero-initialized Q-table, using the same 8×8 maze, slip probability, pure greedy policy, random seeds, and training and evaluation episode counts.
 
-Run these commands from `Reinforcement-learning/01.Q-learning`. The ablation entry point applies the [ordinary-step reward override](../run/configs/reward_ablation.json) to the default configuration and saves its results in `output/reward_ablation/`.
+Run these commands from `Reinforcement-learning/01.Q-learning` to reproduce both conditions. The first uses `maze.step_reward` and writes to `output/`. `main.py` uses `reward_ablation.step_reward` and writes to `output/reward_ablation/`. Both read their settings from [run/configs.json](../run/configs.json).
 
 ```bash
+python -c 'from pathlib import Path; from run.experiment import run_experiment; run_experiment(Path("output"))'
 python main.py
-python reward_ablation.py
 ```
 
 | Ordinary-step reward | Reached food | Hit a trap | Timed out | Mean steps to food | Mean return under each reward rule | Mean return scored with a −1 step reward |

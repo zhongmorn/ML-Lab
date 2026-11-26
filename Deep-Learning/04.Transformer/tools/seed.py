@@ -1,6 +1,6 @@
 import torch
 
-from run.configs import CPU_THREADS
+from run.config import CPU_THREADS
 
 
 # 固定随机种子与 CPU 线程数，便于复现实验。

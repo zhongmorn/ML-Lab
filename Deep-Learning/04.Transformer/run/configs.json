@@ -1,0 +1,15 @@
+{
+  "model": {
+    "width": 48,
+    "num_heads": 1,
+    "max_length": 64
+  },
+  "steps": 1200,
+  "batch_size": 32,
+  "learning_rate": 0.003,
+  "seed": 42,
+  "cpu_threads": 1,
+  "log_interval": 200,
+  "loss_average_window": 100,
+  "max_new_tokens": 48
+}

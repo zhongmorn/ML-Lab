@@ -358,9 +358,11 @@ class PPOConfig:
     # 将下面的方法声明为配置类的类方法。
     @classmethod
     # 定义从 JSON 文件创建配置的方法。
-    def from_json(cls, path: str | Path) -> "PPOConfig":
-        # 读取并解析 JSON 配置。
+    def from_json(cls, path: str | Path, *, env_id: str | None = None) -> "PPOConfig":
+        # 读取 JSON，并按环境选择配置。
         config = json.loads(Path(path).read_text(encoding="utf-8"))
+        if env_id is not None:
+            config = config[env_id]
         # 忽略历史实验保存的学习率衰减选项。
         config.pop("anneal_lr", None)
         # 用当前配置字段构造配置。

@@ -192,9 +192,10 @@ class Evaluator:
         return frames
 
 
-def run_experiment(env_name):
+def run_experiment(env_name=None):
     """训练、评估并保存实验结果。"""
     cfg = load_config(env_name)
+    env_name = cfg.env_name
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     actual_config = dict(vars(cfg), device=str(cfg.device))
     print(f"正在训练 DDQN | 环境: {env_name}")

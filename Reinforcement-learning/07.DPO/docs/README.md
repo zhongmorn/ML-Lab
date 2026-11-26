@@ -11,8 +11,7 @@
 ├── requirements.txt        # Python 依赖
 ├── run
 │   ├── agent.py             # DPO 损失和优化
-│   └── configs
-│       └── default.json     # 实验参数
+│   └── configs.json         # 实验参数
 ├── tools
 │   └── plot.py              # 训练曲线
 └── output                  # 实验结果
@@ -53,7 +52,7 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-默认在 CPU 上用 4,096 个偏好对训练 16 轮，批大小为 128，Adam 学习率为 $0.03$，$\beta=0.5$。训练与测试随机种子分别是 42 和 2026。[默认配置](../run/configs/default.json)
+默认在 CPU 上用 4,096 个偏好对训练 16 轮，批大小为 128，Adam 学习率为 $0.03$，$\beta=0.5$。训练与测试随机种子分别是 42 和 2026。[默认配置](../run/configs.json)
 
 <br>
 

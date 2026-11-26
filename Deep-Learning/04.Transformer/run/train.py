@@ -3,7 +3,7 @@ from pathlib import Path
 import torch
 from torch.nn import functional as F
 
-from .configs import (
+from .config import (
     BATCH_SIZE,
     DEFAULT_SEED,
     DEFAULT_STEPS,

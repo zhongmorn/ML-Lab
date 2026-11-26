@@ -11,8 +11,7 @@
 ├── requirements.txt         # Python 依赖
 ├── run
 │   ├── agent.py             # GRPO 策略更新
-│   └── configs
-│       └── default.json     # 实验参数
+│   └── configs.json         # 实验参数
 ├── tools
 │   └── plot.py              # 绘制训练曲线
 └── output                   # 实验结果
@@ -58,7 +57,7 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-默认训练 120 批，每批 64 个输入，每个输入采样 8 个动作，固定该批数据做 4 次优化。学习率为 $0.03$，裁剪幅度为 $0.2$，KL 系数为 $0.02$，训练种子为 42。[默认配置](../run/configs/default.json)
+默认训练 120 批，每批 64 个输入，每个输入采样 8 个动作，固定该批数据做 4 次优化。学习率为 $0.03$，裁剪幅度为 $0.2$，KL 系数为 $0.02$，训练种子为 42。[默认配置](../run/configs.json)
 
 <br>
 

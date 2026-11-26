@@ -3,7 +3,7 @@ import math
 import torch
 from torch import nn
 
-from .configs import MODEL_CONFIG
+from .config import MODEL_CONFIG
 
 
 class CausalSelfAttention(nn.Module):

@@ -12,7 +12,8 @@ This experiment trains a Transformer from scratch on synthetic passages about an
 ├── main.py
 ├── requirements.txt
 ├── run/
-│   ├── configs/
+│   ├── configs.json          # Model, training, and generation settings
+│   ├── config.py             # Configuration loader
 │   ├── model.py
 │   ├── train.py
 │   └── predict.py
@@ -30,10 +31,13 @@ This experiment trains a Transformer from scratch on synthetic passages about an
 <br>
 
 ## 2. How the Transformer Works
+
 ### A. From Text to Input Vectors
 ![Tokenization, embedding lookup, positional encoding, and vector addition](figures/01-input-vectors.png)
+
 #### A.1 Tokenization
 Training and prediction share the tokenizer in `tools/batch.py`. The vocabulary contains the characters in the training text and the special tokens. At prediction time, the tokenizer maps a character outside the vocabulary to `<UNK>`.
+
 #### A.2 Embedding Lookup
 After prepending `<BOS>`, each token ID $t_i$ selects a row of the embedding matrix. Training updates this matrix. For “猫是什么？”, the IDs including the start token are `[1, 192, 146, 25, 15, 323]`.
 
@@ -59,6 +63,7 @@ $$
 
 ### B. Transformer Block and Output Layer
 ![Layer normalization, causal attention, residual connections, and the output layer](figures/02-transformer-block.png)
+
 #### B.1 Layer Normalization
 For each position, layer normalization computes the mean and variance over that position's vector components, then applies a learned scale and shift.
 
@@ -124,6 +129,7 @@ Compute the first components of $K$ and $V$ the same way. The table splits the 4
 | $V$ | $(-0.202270,\;-0.006749,\;0.202244,\;-0.024431)$ | 0.405862 | -0.282761 | -0.073655 | 0.049445 |
 
 The example uses saved weights after training. The display values are rounded, and the sums use full-precision products.
+
 #### B.3 Dot Products and Scaling
 
 $$
@@ -131,6 +137,7 @@ S=\frac{QK^\mathsf T}{\sqrt{d_k}}.
 $$
 
 Rows represent query positions and columns represent source positions. $d_k$ is the key width of each attention head.
+
 #### B.4 Causal Mask
 
 $$
@@ -139,6 +146,7 @@ M_{ij}=\begin{cases}0&j\leq i\\-\infty&j>i.\end{cases}
 $$
 
 For example, the mask prevents the character “么” in “猫是什么？” from attending to the question mark that follows it.
+
 #### B.5 Row-Wise Softmax
 
 $$
@@ -146,6 +154,7 @@ A=\operatorname{softmax}(\widetilde S).
 $$
 
 The weights in each row sum to 1. Masked positions receive weight 0.
+
 #### B.6 Weighted Sum
 
 $$
@@ -153,6 +162,7 @@ O=AV,\qquad o_i=\sum_j A_{ij}v_j.
 $$
 
 At each position, the model combines the value vectors using the weights from the corresponding row.
+
 #### B.7–B.10 Output Projection, Residuals, and Feed-Forward Network
 
 $$
@@ -172,8 +182,10 @@ $$
 
 ### C. Training and Prediction
 ![Construction of next-token targets from training text and completion of a held-out question](figures/03-training-generation.png)
+
 #### C.1 Training Text and Next-Token Targets
 `run/train.py` reads the [training text](../data/train.txt) and builds the vocabulary from it. In each window, the target at a position is the following character. The corpus includes statements about cats and questions and explanations about other animals. The evaluation question “猫是什么？” and the reference answer “猫是一种动物” (A cat is an animal) are held out.
+
 #### C.2 Loss
 At each position, softmax converts scores to probabilities. Cross-entropy measures the loss for the next token in the original text. $\mathcal I$ contains the target positions after excluding padding.
 
@@ -184,12 +196,14 @@ $$
 
 #### C.3 Backpropagation and Parameter Updates
 The model starts with random weights, and each batch samples several text windows. Backpropagation computes the gradients, and AdamW updates the weights at the configured learning rate.
+
 #### C.4 Predicting the Held-Out Question
 After training, `run/predict.py` reads the question “猫是什么？” from the [evaluation file](../data/eval.txt). The prompt consists of the start token and the question. Each line of the file contains one question. The model appends the highest-probability token at the last position and repeats until it predicts `<EOS>`.
 
 <br>
 
 ## 3. Results
+
 The model trains on a [synthetic corpus about animals](../data/train.txt).
 
 Run from the repository root.
@@ -200,7 +214,7 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-By default, `main.py` trains on `data/train.txt`. Set `PREDICT_ONLY` to `True` to load the saved weights and read `data/eval.txt`. Set `QUESTION` to supply your own question. Model dimensions, training steps, the random seed, and prediction length are set in [run/configs/__init__.py](../run/configs/__init__.py).
+By default, `main.py` trains on `data/train.txt`. Set `PREDICT_ONLY` to `True` to load the saved weights and read `data/eval.txt`. Set `QUESTION` to supply your own question. The configuration file contains model dimensions, training steps, the random seed, and prediction length. [run/configs.json](../run/configs.json)
 
 The output includes the [experiment records](../output/results.json) and [model weights](../output/weights.pt). The two plots show the 1,200-step run.
 
@@ -219,4 +233,5 @@ The table records the results at three training budgets. All three runs use the 
 <br>
 
 ## 4. Reference
+
 Vaswani, A. et al. (2017). [Attention Is All You Need](https://arxiv.org/abs/1706.03762). NeurIPS 2017.

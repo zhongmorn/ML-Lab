@@ -29,5 +29,8 @@
   },
   "reporting": {
     "rolling_window": 200
+  },
+  "reward_ablation": {
+    "step_reward": 0.0
   }
 }

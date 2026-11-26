@@ -12,10 +12,10 @@
 ├── requirements.txt
 ├── run
 │   ├── agent.py              # Q-networks and DQN update
+│   ├── configs.json          # CartPole settings
+│   ├── configs.py            # Configuration loader
 │   ├── replay.py             # Experience replay buffer
-│   ├── model.py              # Training, evaluation, and demo recording
-│   └── configs
-│       └── cartpole.json
+│   └── model.py              # Training, evaluation, and demo recording
 └── tools
     ├── seed.py               # Random seeding
     └── plot.py               # Learning curves and GIFs
@@ -24,6 +24,7 @@
 <br>
 
 ## Run the Experiment
+
 From the repository root, run these commands.
 
 ```bash
@@ -34,13 +35,14 @@ python main.py
 
 DQN trains and evaluates on CartPole-v1. It saves the configuration, summary, and episode records in `output/results.json`, alongside the plots, demo GIF, and model weights. It uses a GPU when CUDA is available.
 
-In `run/configs/cartpole.json`, set the number of training rounds with `train_episodes`, which defaults to 500 rounds. Each round is one complete episode, ending on `terminated` or `truncated`, with the environment's own time limit retained. The progress bar totals 500 episodes and advances once per completed episode. The training seed `seed` defaults to 42 and initializes the PyTorch, NumPy, and Python random number generators. Only the first training episode calls `reset(seed=42)`; later episodes continue the environment's random sequence. Evaluation resets each episode with `eval_seed + i`, using 50 distinct seeds, 20000–20049, by default. Fixed seeds make runs reproducible; they do not force identical episode returns.
+In [run/configs.json](../run/configs.json), set the number of training rounds with `train_episodes`, which defaults to 500 rounds. Each round is one complete episode, ending on `terminated` or `truncated`, with the environment's own time limit retained. The progress bar totals 500 episodes and advances once per completed episode. The training seed `seed` defaults to 42 and initializes the PyTorch, NumPy, and Python random number generators. Only the first training episode calls `reset(seed=42)`; later episodes continue the environment's random sequence. Evaluation resets each episode with `eval_seed + i`, using 50 distinct seeds, 20000–20049, by default. Fixed seeds make runs reproducible; they do not force identical episode returns.
 
 Adam uses the fixed learning rate in `lr` throughout training, `3e-3` (0.003), without a learning rate schedule. `epsilon_decay` only decays the exploration rate after each episode; it does not change the learning rate.
 
 <br>
 
 ## How DQN Works
+
 DQN uses a neural network to estimate the value $Q_\omega(s,a)$ of taking action $a$ in state $s$. The TD target also depends on a network output. Computing predictions and targets with the same parameters on every update makes the targets move during training, which can cause oscillations.
 
 - The **online network $Q_\omega$** (`q_net`) predicts the value of the current action. Gradient descent updates its parameters.
@@ -61,8 +63,10 @@ Here $r_i$ is the immediate reward, $\gamma$ is the discount factor, and $N$ is 
 <br>
 
 ## Algorithm
+
 ### Inputs
 The state space $\mathcal S$, action space $\mathcal A$, discount factor $\gamma$, fixed learning rate $\alpha$, exploration rate $\epsilon$, target sync interval $C$, replay capacity $M$, batch size $N$, and the number of training episodes `train_episodes`.
+
 ### Steps
 
 1. Initialize the online network, copy its weights to the target network, create replay buffer $R$, and set the initial exploration rate.
